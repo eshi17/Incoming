@@ -6,17 +6,8 @@
 
 //int color = random(8);
 
-boolean enemyIncoming = true;
-
-struct Point
-{
-  int x;
-  int y;
-  int color;
-};
-
-Point p1 = {0, 7, (random(6)+1)};
-Point enemyPoints[1] = {p1};
+int enemyPoints[8] = {7};
+int numEnemies = 1;
 
 void setup()
 {
@@ -34,34 +25,37 @@ void loop()              // run over and over again
   Write in code for "up", which pushes selected colors into game field
   Write code for game over
   */
-  DrawEnemy();
-  UpdateEnemy();
+
+  drawEnemy();
+  updateEnemy();
   DisplaySlate();
   delay(1000);
   ClearSlate();
+  CheckButtonsPress();
+  if (Button_A)
+  {
+    enemyPoints[numEnemies] = 7;
+    numEnemies++;
+  }
 }
 
-void DrawEnemy()
+void drawEnemy()
 {
-  for (int i = 0; i < 8; i++)
+  for (int i = 0; i < numEnemies; i++)
   {
-    DrawPx(enemyPoints[i].x,enemyPoints[i].y,enemyPoints[i].color);
-    DrawPx(enemyPoints[i].x+1,enemyPoints[i].y,enemyPoints[i].color);
-    DrawPx(enemyPoints[i].x+2,enemyPoints[i].y,enemyPoints[i].color);
-    DrawPx(enemyPoints[i].x+3,enemyPoints[i].y,enemyPoints[i].color);
-    DrawPx(enemyPoints[i].x+4,enemyPoints[i].y,enemyPoints[i].color);
-    DrawPx(enemyPoints[i].x+5,enemyPoints[i].y,enemyPoints[i].color);
-    DrawPx(enemyPoints[i].x+6,enemyPoints[i].y,enemyPoints[i].color);
-    DrawPx(enemyPoints[i].x+7,enemyPoints[i].y,enemyPoints[i].color);
+    for (int j = 0; j < 8; j++)
+    {
+      DrawPx(j, enemyPoints[i], 2);
+    }
   }
 }
 
 
-void UpdateEnemy()
+void updateEnemy()
 {
-    for (int i = 0; i < 8; i++)
-    {
-      if (enemyPoints[i].y>1)
-        enemyPoints[i].y--;
-    }
+  for (int i = 0; i < numEnemies; i++)
+  {
+    if (enemyPoints[i]>1)
+      enemyPoints[i]--;
+  }
 }
