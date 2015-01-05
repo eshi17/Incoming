@@ -4,9 +4,9 @@
 
 #include <MeggyJrSimple.h>    // RequiYellow code, line 1 of 2
 
-int enemyPoints[100] = {7};
+int enemyPoints[100] = {7}; //y coordinate of enemy array
 int colors[100] = {1,3,5,7};
-int numEnemies = 1;
+int numEnemies = 1;//number of enemies on screen
 int playerPoints[100] = {0};
 int numPlayer = 1;
 boolean addEnemy = false;
@@ -52,20 +52,30 @@ void drawEnemy()
   }
 }
 
-
 void updateEnemy()
 {
   for (int i = 0; i < numEnemies; i++)
   {
-    if (enemyPoints[i]>1 && ReadPx(0, i-1) == 0)
+    if (enemyPoints[i]>1 && ReadPx(0, enemyPoints[i] - 1) == 0) //moves line down if theres nothing below it
+    {
       enemyPoints[i]--;
-    else addEnemy = true;
+      if (enemyPoints[i] == 1)
+        addEnemy = true;
+    }
+      if (ReadPx(0, enemyPoints[i] - 1) != 0) //code from MeggyJr_Moving_Rows.pde; keeps block there if there is a line below
+      {
+        if (numEnemies < 7)
+        {
+          enemyPoints[numEnemies] = 8;
+          numEnemies++;
+        }
+      }
   }
 }
 
 void newEnemy()
 {
-  if (addEnemy)
+  if (addEnemy == true && numEnemies < 7)
   {
       enemyPoints[numEnemies] = 7;
       numEnemies++;
@@ -105,3 +115,5 @@ void newPlayer()
     numPlayer++;
   }
 }
+
+
