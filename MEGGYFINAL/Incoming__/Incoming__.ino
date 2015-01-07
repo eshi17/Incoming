@@ -5,12 +5,13 @@
 #include <MeggyJrSimple.h>    // RequiYellow code, line 1 of 2
 
 int enemyPoints[100] = {7}; //y coordinate of enemy array
-int colors[100] = {1,3,5,7};
+int colors[100] = {1,2,3,4,5};
 int numEnemies = 1;//number of enemies on screen
 int playerPoints[100] = {0};
 int numPlayer = 1;
 boolean addEnemy = false;
 int playerColor = 1;
+int timer = 1;
 
 void setup()
 {
@@ -28,6 +29,8 @@ void loop()              // run over and over again
   Write in code for "up", which pushes selected colors into game field
   Write code for game over
   */
+  timer++; //add one to timer
+    if (timer > 20) timer = 1;
   CheckButtonsDown();
   drawEnemy();
   updateEnemy();
@@ -36,12 +39,12 @@ void loop()              // run over and over again
   updatePlayer();
   newPlayer();
   DisplaySlate();
-  delay(500);
+  delay(200);
   ClearSlate();
 }
 
 
-void drawEnemy()
+void drawEnemy() //draws a single horizontal line of a certain color (out of red, blue, yellow)
 {
   for (int i = 0; i < numEnemies; i++)
   {
@@ -54,22 +57,23 @@ void drawEnemy()
 
 void updateEnemy()
 {
-  for (int i = 0; i < numEnemies; i++)
+  if (timer % 10 == 0)
   {
-    if (enemyPoints[i]>1 && ReadPx(0, enemyPoints[i] - 1) == 0) //moves line down if theres nothing below it
+    for (int i = 0; i < numEnemies; i++)
     {
-      enemyPoints[i]--;
-      if (enemyPoints[i] == 1)
-        addEnemy = true;
-    }
-      if (ReadPx(0, enemyPoints[i] - 1) != 0) //code from MeggyJr_Moving_Rows.pde; keeps block there if there is a line below
+      if (enemyPoints[i]>1 && ReadPx(0, enemyPoints[i] - 1) == 0) //if theres nothing below line
       {
-        if (numEnemies < 7)
+        enemyPoints[i]--;//moves line down
+        if (enemyPoints[i] == 1)//if enemy has stopped moving, add new enemy
         {
-          enemyPoints[numEnemies] = 8;
-          numEnemies++;
+         addEnemy = true;
         }
       }
+      if (enemyPoints[i]>1 && ReadPx(0, enemyPoints[i] - 1) != 0) //code from MeggyJr_Moving_Rows.pde; keeps block there if there is a line below
+      {
+        addEnemy = true;
+      }
+    }
   }
 }
 
@@ -91,6 +95,26 @@ void DrawPlayer()
     {
       DrawPx(j, playerPoints[i], playerColor);
     }
+    
+  if (Button_Right)       // Change player color
+  {    
+    playerColor++;      //Increase playerColor by one, which in turns changes the color itself
+  }
+  
+  if (playerColor > 5)
+  {
+    playerColor = 1; //creates a wrap for the player. Maximum color is blue
+  }
+  
+  if (Button_Left)       // Change player color
+  {    
+    playerColor--;      //Decrease playerColor by one, which in turns changes the color itself
+  }
+  
+  if (playerColor < 1)
+  {
+    playerColor = 5; //creates a wrap for the player. Maximum color is blue
+  }
   }
 }
 
