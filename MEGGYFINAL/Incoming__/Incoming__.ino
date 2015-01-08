@@ -4,19 +4,21 @@
 
 #include <MeggyJrSimple.h>    // RequiYellow code, line 1 of 2
 
-int enemyPoints[100] = {7}; //y coordinate of enemy array
-int colors[100] = {1,2,3,4,5};
+int enemyPoints[7] = {7}; //y coordinate of enemy array
+int colors[100] = {0};
 int numEnemies = 1;//number of enemies on screen
 int playerPoints[100] = {0};
 int numPlayer = 1;
 boolean addEnemy = false;
 int playerColor = 1;
 int timer = 1;
+int offset = random(93);
 
 void setup()
 {
   MeggyJrSimpleSetup();
   Serial.begin(9600);
+  fillColors();
 }
 
 void loop()              // run over and over again
@@ -36,10 +38,9 @@ void loop()              // run over and over again
   updateEnemy();
   newEnemy();
   DrawPlayer();
-  updatePlayer();
-  newPlayer();
+  checkHit();
   DisplaySlate();
-  delay(200);
+  delay(150);
   ClearSlate();
 }
 
@@ -50,7 +51,7 @@ void drawEnemy() //draws a single horizontal line of a certain color (out of red
   {
     for (int j = 0; j < 8; j++)
     {
-      DrawPx(j, enemyPoints[i], colors[i]);
+      DrawPx(j, enemyPoints[i], colors[i + offset]);
     }
   }
 }
@@ -61,15 +62,15 @@ void updateEnemy()
   {
     for (int i = 0; i < numEnemies; i++)
     {
-      if (enemyPoints[i]>1 && ReadPx(0, enemyPoints[i] - 1) == 0) //if theres nothing below line
+      if (enemyPoints[i]>2 && ReadPx(0, enemyPoints[i] - 1) == 0) //if theres nothing below line
       {
         enemyPoints[i]--;//moves line down
-        if (enemyPoints[i] == 1)//if enemy has stopped moving, add new enemy
+        if (enemyPoints[i] == 2)//if enemy has stopped moving, add new enemy
         {
          addEnemy = true;
         }
       }
-      if (enemyPoints[i]>1 && ReadPx(0, enemyPoints[i] - 1) != 0) //code from MeggyJr_Moving_Rows.pde; keeps block there if there is a line below
+      if (enemyPoints[i]>2 && ReadPx(0, enemyPoints[i] - 1) != 0) //code from MeggyJr_Moving_Rows.pde; keeps block there if there is a line below
       {
         addEnemy = true;
       }
@@ -118,26 +119,44 @@ void DrawPlayer()
   }
 }
 
-void updatePlayer()
+void checkHit() // Check to see if the playerColor is the same as the colored line right above it.
+// If it is the same, then colored enemy line above player dissapears
 {
-  for (int i = 0; i < numPlayer; i++)
-  {
     if (Button_Up)
+    {
+     if (playerColor == colors[0+offset])
+      {
+        //copy all values in enemyPoints over by one
+        //add a new enemy at the last index in array
+        for (int i = 0; i < numEnemies-1; i++)
+        {
+          enemyPoints[i] = enemyPoints[i+1];//enemy line becomes one above it
+        }
+        enemyPoints[numEnemies-1] = 7;
+        if (offset < 92) //if colors is less than 100
+          {
+            offset++;//add one to colors (viewing box will move higher)
+          }
+          else offset = 0;//wrap back to 0
+        //copy all values in colors over by one
+      }
+    }
+}
+    /*
+    if playercolor matches the color in colors[0]
+    then shift every element in enemyPoints up by one.
+    shift every color in colors up by one.
     {
       if (playerPoints[i]<8)
       playerPoints[i]++;
     }
-  }
-}
+*/
 
-void newPlayer()
+void fillColors()
 {
-  for (int i = 0; i < numPlayer; i++)
-  if (playerPoints[i] == 1)
+  // fill array with random numbers from 1 to 5.
+  for (int i = 0; i < 100; i++)
   {
-    playerPoints[numPlayer] = 0;
-    numPlayer++;
+    colors[i] = random(5)+1;//generates random colors between 1 and 5
   }
 }
-
-
