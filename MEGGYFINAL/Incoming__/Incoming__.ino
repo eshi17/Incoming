@@ -173,29 +173,8 @@ void gameOver()
         {
           if (ReadPx(0,6) != 0)
           {
-            numEnemies = 0;//restarts game
-            addEnemy = true;
-          }
-        }
-      }
-    }
-  }
-}
-
-void gameWin()
-{
-  if (ReadPx(0,2) == 0)
-  {
-    if (ReadPx(0,3) == 0)
-    {
-      if (ReadPx(0,4) == 0)
-      {
-        if (ReadPx(0,5) == 0)
-        {
-          if (ReadPx(0,6) == 0)
-          {
-            numEnemies = 0;//restarts game
-            addEnemy = true;
+            numEnemies = 0;//restarts game if 5 of the rows are filled
+            addEnemy = true;//new enemy comes down
           }
         }
       }
