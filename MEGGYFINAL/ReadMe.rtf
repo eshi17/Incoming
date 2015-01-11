@@ -1,0 +1,70 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf200
+{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red38\green38\blue38;\red255\green255\blue255;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww18000\viewh11320\viewkind0
+\deftab720
+\pard\pardeftab720\sl400\sa200
+
+\f0\fs26 \cf2 \cb3 Part I: Please provide the following information:\uc0\u8232 Name of your game\u8232 One paragraph description, or "teaser" text to introduce your game. Be imaginative. It should set the context and encourage someone to want to play your game.\u8232 \u8232 Part II: In a concise, thoughtful reflection, please address the following prompts:\u8232 \u8232 Tell the story of the process of writing your Meggy game.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl400
+\ls1\ilvl0\cf2 {\listtext	\'95	}What was difficult? What was surprising?\
+{\listtext	\'95	}Please describe how collaboration with others (classmates, teachers, friends) enhanced your building of this game.\
+{\listtext	\'95	}Any bugs or stuff that doesn't quite work right? Please explain in detail, as well as what thoughts you have about what might be wrong. Be specific.\
+{\listtext	\'95	}If you had more time to work on this project, what features might you add? What would make this game even better?\
+{\listtext	\'95	}What did this game teach you about programming? About game design? About Life In General?\
+\pard\tx720\pardeftab720\sl400
+\cf2 \
+
+\b Maze Game
+\b0 \
+	An underwater treasure hunt! Navigate through the maze of coral rocks in search of the four pink diamonds. However, be careful of the hungry sharks roaming through the waters. The game requires only a quick reaction and simple strategy to win, so what are you waiting for?\
+\
+	This game was relatively difficult to code probably because of my unfamiliarity with Arduino and the Meggy. Two sources of frustration were the treasures and the sharks (very important components, you see). I couldn\'92t find a way to get the player to be able to \'93collect\'94 the treasures. Initially, I was so intent on the actual pink treasure itself, that I totally overlooked the idea that in the Meggy, it is totally possible to rely on only the coordinates to switch booleans. After guidance from Mr. Kiang, I was able to walk over the treasure and successfully \'93collect\'94 it. I was also very confused as to how to make the sharks move back and forth on a single path. Mr. Lai suggested that I use booleans, which I did. However, I used such strangely named int that I got really confused at what I was working with. Mr. Kiang helped me again by sorting out these names. Finally, one of the biggest problems that I had (that caused me -frustration- anger) was the timing of the game. Because the sharks were constantly moving at a reasonably slow pace, the player would move at that pace as well. Therefore, Mr. Kiang introduced me to the timer. This nifty tool in Arduino allows different components to move at different speeds. As this was my first game, I was surprised at how versatile the Meggy was. It was just an 8x8, but with proper coding, it can do lots of things! In my coding process, I sought help and advice from my friend, Lee-Won a lot. She was the source for a couple of ideas (ranging from color choice to the initial concept).\
+	Of everything, I think I know of only one bug in my game: sometimes the game isn\'92t restarted even if the player has contact with the shark. It only happens when both the shark and player are in full speed (player is holding down directional button). But other than that, I had several people play the final product, and most told me it was quite a smooth play. If I had more time for this project, I would probably add two more levels. It\'92s a little boring playing the same level over and over again. But at the same time, I relish the experience of playing because I personally know how much work went into it.\
+	There were a lot of components in this game, and a lot of energy needed to create it. I think one of the most important things that I learned from this is the necessity of an audience\'92s feedback. I asked MANY people to play it (out of proudness and curiosity of their opinions), and I got critique ranging from color brightness to game mechanics. I recall from one of the readings we did in the beginning that a game cannot be seen from the author\'92s perspective, but rather the player\'92s. I had played the game so many times that I knew all of its little strategies and rules, but first time players would not. Especially with the Meggy (where instruction\'92s don\'92t exists), intuitiveness is essential. In terms of programming specifically, I learned about timing and booleans; two simple tools that can change a whole lot. **\
+\
+
+\b Incoming
+\b0 \
+	Proposed: Ah, hello. We regret to inform you that there is a row of RED foot soldiers approaching the city Walls. Behind them are soldiers from the other countries, ORANGE, YELLOW, GREEN, and BLUE. They each have their sources of weakness, which we have gathered here at the Wall. Switch between the colors and send them over the Walls to defeat the coming enemies! Beware, however, that the Wall can only hold up to 6 enemies. Once they pile, we\'92re dead. Good luck.\
+\
+	This game was pretty much doomed from the moment it formed in my brain. As Mr. Kiang said, it was over-ambitious and too difficult for my level of coding knowledge. What was difficult? Certainly not the proposal. I struggled with almost everything from moving the enemies down to killing them. Who knew an 8x8 could be so difficult to work with (notice the connection to my above statement in the Maze Game)? I certainly did not expect a game like this to require such advanced coding. I\'92ll begin with my difficulties:\
+\
+1) THE ENEMIES - 
+\i COMPROMISED
+\i0 \
+	These guys were the worst, but also closest to what I initially envisioned. Essentially, they were rows of colored lines coming down the screen. Originally, I wanted four colors in each row. However, that was too difficult to do because getting a single color to match was already a HUGE problem; never mind four. So that went out the window. Then I spent about two weeks working on the lines coming down. This was super hard because of the individuality of each line. Each of the lines had its own attributes, but needed to act the same. Mr. Kiang proposed that I used an array to create them. However, this array was confusing as heck. The colors moved around a lot, and for some reason they were connected with the y coordinate they were in(?). I\'92m still unsure of what happened there.
+\i \
+
+\i0 2) THE INTERACTION - 
+\i COMPROMISED\
+	
+\i0 Originally, I wanted to have the players shoot up from the bottom and \'93crash\'94 with the enemies on the battlefield (because how much more action packed can it be?). Sadly, I didn\'92t know how to do that. So I just left it as the a check between the player\'92s color and the color of the enemy resting above the white wall (in the second row up). This was a lot simpler and easier to code than the original. The problem arose with the elimination. The code would translate into something like this: when the color of the enemy array matched with the color of the player, take 
+\i AN 
+\i0 enemy line away. The \'93an\'94 made the entire thing slightly ambiguous, so I was never sure what line actually was removed. After conferencing with Mr. Kiang, and having him help me, the code worked for the first few lines, but it glitched after that. The code consisted of using an offset for the colors and having that match (I suspect the large amount of numbers that I wanted to use made something go wrong). After the beta tests, I tried to work around it, however I did not understand enough of the initial code or other code to work around the problem.\
+There were a couple more minor difficulties, but they arose because of the problems stated above. \
+\
+Throughout this entire game, I needed a lot of help and guidance from Mr. Kiang. The game would have collapsed right from the beginning were it not for him (the final collapse was due to pressure and time from my part >_>). We exchanged many emails, me describing glitches and asking questions, while he patiently answered my inquiries. Through ScreenHero, steep progress was made. I think I asked for help too late into the project\'96two weeks before it was due. Which was simply not enough (to my surprise). I\'92m very disappointed in myself that I was unable to finish the game. I feel like all the help that I received went to waste (it can be argued that I learned something from this experience, but the grading is still the final number). So the prompt asks me if there are any bugs: I said it above. But I will reiterate and describe them in closer detail:\
+\
+1) NEW ENEMY\
+	New enemies are supposed to appear when a wave reaches the bottom of the playing field or when it stacks on another enemy. For some reason, there was a glitch that made two enemies appear on the third-fourth wave, and then one of the pair would disappear. Not sure why that happened\'96could not debug.\
+2) COLOR[I]\
+	The colors were the only things that distinguished each line, which confused me a lot. When I conferenced with Mr. Kiang, he introduced a complex system of offsets where the colors were randomly selected and put into a \'93moving array\'94 (the viewing window changed). Ho, already sounds complicated! I asked if we could use a total of 100 colors with 5 color values (ROYGB), and there were a couple of instances were we had to subtract numbers and stuff. I suspect that\'92s where things went wrong. But I don\'92t know enough to fix it. Hence, the bug would create weird colors after the check hit method was initiated.\
+3) ENEMYPOINTS[I]\
+	EnemyPoints[i] were the y coordinates of the enemy lines. Sounds simple, but it made a lot of things very complicated. Because there were many enemies at one time, each enemy line had an enemypoint[i], each different from each other\'96but using the same array. This became a problem when we hit check (button A). The enemy points were glitch and some lines would move to different rows. To my knowledge, the code to get rid of the enemy line is to remove one from numEnemies. However, I never really understood how the computer knew to remove the bottommost enemy. Thats were I suspect the problem is.\
+4) CHECK HIT\
+	Check Hit. As I described before, Check Hit method would run when the player presses Button_A. This would trigger the computer to check if the player color matched the color[i] (which color? I don\'92t know\'85). The lines might glitch and move to another row. And it was a given that the colors would change to another one (maybe the color above, or a random color). Then, after a few enemy waves have been fought off, the rows stop disappearing when matched. They would not go away, which would hold up the entire line behind it.\
+\
+If I had more time, I would definitely conference more. As for features, I would try for my original idea of four colors with the cursor and everything. It would probably take a really long time and a lot of discussion, but I think with the Meggy, any idea is probably possible. This game was frustrating; I felt so powerless because of my own ignorance of Arduino. I know its a given, but I really overestimated myself (which was stupid considering I did the same time before for the inform game). This game taught me that coding can be SUPER powerful, but also super complicated. Every aspect of the game should be planned before hand so that I\'92m not wasting time. I realized the importance of comments and pseudocode too late. As for game design, when we beta-tested the other day, I felt so embarrassed. Nobody understood the controls, in addition to the game requiring the player to act immediately, plus all the glitches. After that, I decided to use both side of the controller (directions + A&B) because people usually press both at once to understand what they\'92re doing. However, again, intuitiveness is so very important! **\
+\
+\
+**LIFE IN GENERAL\
+Mr. Kiang,\
+For me, this game taught me not to overestimate myself. I know in our conversation, you told me that shooting for the moon will land me in the stars even if I don\'92t make it. But as I mentioned at the beginning of the semester, I am an achiever; I live to achieve and complete. The incompletion of this project has left me greatly disappointed with myself (not to mention nervous about my GPA). True, if I don\'92t try for something beyond my goals, I will never improve. But in the end, the only thing that is the truth is that I couldn\'92t finish. Sure, I\'92ve landed in the stars by gaining vast amounts of coding knowledge, but I\'92m still not at the moon I wanted to land at.\
+\
+Ideally, you\'92ll probably want to hear something along the lines of \'93I learned not to procrastinate\'94 or \'93I learned never to give up\'94. But I had to give up, because I realized that things don\'92t always go the way planned, and I can\'92t always get what I want, no matter how ambitious I push myself to be. Nevertheless, thank you Mr. Kiang for your guidance through this project. It went somewhere, and I picked up a lot along the way.\
+\
+Arduino is really arduous.\
+Elana}
