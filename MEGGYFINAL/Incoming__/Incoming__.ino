@@ -35,6 +35,7 @@ void loop()              // run over and over again
     if (timer > 20) timer = 1;
   CheckButtonsDown();
   drawEnemy();
+  whiteLine();
   updateEnemy();
   newEnemy();
   DrawPlayer();
@@ -119,12 +120,20 @@ void DrawPlayer()
   }
 }
 
+void whiteLine()
+{
+  for (int x = 0; x < 8; x++)
+  {
+    DrawPx(x, 1, White);
+  }
+}
+
 void checkHit() // Check to see if the playerColor is the same as the colored line right above it.
 // If it is the same, then colored enemy line above player dissapears
 {
-    if (Button_Up)
+    if (Button_A)
     {
-     if (playerColor == colors[0+offset])
+     if (ReadPx(0,2) && playerColor == colors[0+offset])
       {
         //copy all values in enemyPoints over by one
         //add a new enemy at the last index in array
