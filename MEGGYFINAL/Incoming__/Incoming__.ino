@@ -12,7 +12,7 @@ int numPlayer = 1;
 boolean addEnemy = false;
 int playerColor = 1;
 int timer = 1;
-int offset = random(93);
+int offset = random(20);//code by Mr. Kiang
 
 void setup()
 {
@@ -24,15 +24,14 @@ void setup()
 void loop()              // run over and over again
 {
   /*
-  Draw the damn boxes at the top with random colors for each one
+  Draw the lines at the top with random colors
+  Draw toggable player (toggle between ROYGB)
   Write code for enemy boxes coming down into game play
-  Write code for cursor that only moves at bottom between four slots
-  Write in slots for cursor to move around in
-  Write in code for "up", which pushes selected colors into game field
+  Write in code for "up", which checks player colors with enemies in game field
   Write code for game over
   */
   timer++; //add one to timer
-    if (timer > 20) timer = 1;
+    if (timer > 20) timer = 1;//code from Mr. Kiang
   CheckButtonsDown();
   drawEnemy();
   whiteLine();
@@ -41,6 +40,7 @@ void loop()              // run over and over again
   DrawPlayer();
   checkHit();
   DisplaySlate();
+  gameOver();
   delay(150);
   ClearSlate();
 }
@@ -52,14 +52,14 @@ void drawEnemy() //draws a single horizontal line of a certain color (out of red
   {
     for (int j = 0; j < 8; j++)
     {
-      DrawPx(j, enemyPoints[i], colors[i + offset]);
+      DrawPx(j, enemyPoints[i], colors[0 + offset]);//the enemy color will be the offset value
     }
   }
 }
 
 void updateEnemy()
 {
-  if (timer % 10 == 0)
+  if (timer % 6 == 0)
   {
     for (int i = 0; i < numEnemies; i++)
     {
@@ -81,7 +81,7 @@ void updateEnemy()
 
 void newEnemy()
 {
-  if (addEnemy == true && numEnemies < 7)
+  if (addEnemy == true && numEnemies < 8)
   {
       enemyPoints[numEnemies] = 7;
       numEnemies++;
@@ -142,13 +142,13 @@ void checkHit() // Check to see if the playerColor is the same as the colored li
           enemyPoints[i] = enemyPoints[i+1];//enemy line becomes one above it
         }
         enemyPoints[numEnemies-1] = 7;
-        if (offset < 92) //if colors is less than 100
+        if (offset < 12) //if colors is less than 20
           {
             offset++;//add one to colors (viewing box will move higher)
           }
           else offset = 0;//wrap back to 0
         //copy all values in colors over by one
-      }
+      }//Code from Mr. Kiang
     }
 }
     /*
@@ -161,7 +161,49 @@ void checkHit() // Check to see if the playerColor is the same as the colored li
     }
 */
 
-void fillColors()
+void gameOver()
+{
+  if (ReadPx(0,2) != 0)
+  {
+    if (ReadPx(0,3) != 0)
+    {
+      if (ReadPx(0,4) != 0)
+      {
+        if (ReadPx(0,5) != 0)
+        {
+          if (ReadPx(0,6) != 0)
+          {
+            numEnemies = 0;//restarts game
+            addEnemy = true;
+          }
+        }
+      }
+    }
+  }
+}
+
+void gameWin()
+{
+  if (ReadPx(0,2) == 0)
+  {
+    if (ReadPx(0,3) == 0)
+    {
+      if (ReadPx(0,4) == 0)
+      {
+        if (ReadPx(0,5) == 0)
+        {
+          if (ReadPx(0,6) == 0)
+          {
+            numEnemies = 0;//restarts game
+            addEnemy = true;
+          }
+        }
+      }
+    }
+  }
+}
+
+void fillColors() //code from Mr. Kiang
 {
   // fill array with random numbers from 1 to 5.
   for (int i = 0; i < 100; i++)
